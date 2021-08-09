@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-        binding.myViewModel = viewModel
         init()
         buttonController()
     }
@@ -30,9 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun init(){
-        viewModel.countData.observe(this, Observer {
-            binding.countText.text = it.toString()
-        })
-
+        binding.lifecycleOwner = this
+        binding.myViewModel = viewModel
     }
 }
